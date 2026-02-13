@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Bachha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & THEME */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #fff5f7; /* Very soft rose petals pink */
+            color: #4a4a4a;
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* FLOATING HEARTS BACKGROUND */
+        .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; overflow: hidden; }
+        .heart { position: absolute; top: -20px; font-size: 25px; color: #ff8fa3; opacity: 0.6; animation: fall 7s linear forwards; }
+        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 70px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(214, 51, 108, 0.15);
+            border: 1px solid #ffeef1;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* HEADERS - CALLIGRAPHIC */
+        h1 { 
+            font-family: 'Great Vibes', cursive; 
+            color: #c2185b; 
+            font-size: 4rem; 
+            margin-bottom: 5px; 
+            font-weight: 400;
+        }
+        h3 { 
+            font-family: 'Playfair Display', serif;
+            color: #9e9e9e; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 5px; 
+            margin-bottom: 40px; 
+        }
+
+        /* CINEMATIC SLIDESHOW */
+        .slideshow-container {
+            width: 100%;
+            height: 500px;
+            margin-bottom: 50px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .mySlides { display: none; height: 100%; width: 100%; }
+        .mySlides img { width: 100%; height: 100%; object-fit: contain; }
+        .fade { animation: fadeEffect 2.5s ease-in-out; }
+        @keyframes fadeEffect { from {opacity: 0.3} to {opacity: 1} }
+
+        /* THE LETTER */
+        .letter-text {
+            text-align: left;
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 40px;
+            white-space: pre-wrap;
+            line-height: 2.2;
+            font-style: italic;
+        }
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            color: #c2185b;
+            font-size: 2.5rem;
+            margin-top: 30px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #d6336c, #ff758c);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(214, 51, 108, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(214, 51, 108, 0.5); }
+
+        /* PASSWORD SCREEN */
+        #section-password { display: none; height: 80vh; flex-direction: column; justify-content: center; align-items: center; }
+        .login-box {
+            background: white; padding: 60px; border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 100%; max-width: 500px;
+            border: 2px solid #ffcad4;
+        }
+        input {
+            width: 100%; padding: 18px; margin: 30px 0;
+            border: 1px solid #ffd1dc; border-radius: 15px; font-size: 1.3rem;
+            text-align: center; font-family: 'Playfair Display', serif; outline: none;
+            transition: border 0.3s;
+        }
+        input:focus { border-color: #c2185b; background-color: #fff9fa; }
+        .error-msg { color: #d6336c; font-weight: bold; font-size: 1.2rem; display: none; margin-top: 15px; }
+
+        /* SPACED OUT GALLERY GRID */
+        #section-collage { display: none; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+        .gallery-item {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item img, .gallery-item video {
+            width: 100%; height: 400px; object-fit: cover; border-radius: 15px;
+        }
+    </style>
+</head>
+<body onclick="playMusic()">
+
+    <audio id="bg-music" loop><source src="music.mp3" type="audio/mpeg"></audio>
+    <audio id="sparkle-sound"><source src="sparkle.mp3" type="audio/mpeg"></audio>
+
+    <div class="heart-bg" id="hearts"></div>
+
+    <div class="container" id="section-letter">
+        <h1>Happy Valentine’s Day</h1>
+        <h3>To my wife & best friend</h3>
+
+        <div class="slideshow-container">
+            <div class="mySlides fade" style="display:block;"><img src="photo1.jpg"></div>
+            <div class="mySlides fade"><img src="photo2.jpg"></div>
+            <div class="mySlides fade"><img src="photo3.jpg"></div>
+            <div class="mySlides fade"><img src="photo4.jpg"></div>
+            <div class="mySlides fade"><img src="photo5.jpg"></div>
+            <div class="mySlides fade"><img src="photo6.jpg"></div>
+        </div>
+
+        <div class="letter-text">
+My love,
+
+Happy Valentine’s Day to my wife, my best friend, my constant, and the only girl who has known me since junior kindergarten.
+
+It still amazes me that our story did not begin with some dramatic first meeting. It began with crayons, school uniforms, and two kids who had no idea they would grow up and choose each other forever. You used to bully me in 5th grade, and somehow that teasing never really stopped. It just changed. It became love hiding inside sarcasm, affection wrapped in eye rolls, and care disguised as the way you still pull my leg.
+
+And I would not change a single second of it.
+
+Because underneath that teasing girl has always been the woman who stands by me, challenges me, and pushes me to become better. You have seen every version of me. The awkward kid. The confused teenager. The dreaming man trying to build something of himself. And you stayed. You did not fall in love with just one phase of me. You grew with me.
+
+That is what makes us special.
+
+We do not just share romance. We share history. We share classrooms, growing pains, silly fights, uncontrollable laughter, and inside jokes that nobody else would ever understand. We share a lifetime that started long before either of us understood what love even meant.
+
+Today I do not just celebrate Valentine’s Day. I celebrate us. I celebrate the way you still tease me. I celebrate the comfort I feel with you. I celebrate that out of everyone in this world, we somehow found our way back to each other.
+
+I promise to keep choosing you. In every season. In every phase. In every lifetime.
+        </div>
+
+        <div class="signature">Forever yours bachha, <br> Ethan</div>
+        <button class="btn" onclick="showPassword()">I have one last question...</button>
+    </div>
+
+    <div id="section-password">
+        <div class="login-box">
+            <h1 style="font-size: 2.5rem;">Just one more thing...</h1>
+            <h2 style="font-family: 'Playfair Display', serif; color: #555; margin-top: 20px;">Who is my favorite footballer?</h2>
+            <input type="text" id="pass-field" placeholder="Type here...">
+            <button class="btn" onclick="checkPassword()">Reveal the Surprise</button>
+            <p id="err" class="error-msg"></p>
+        </div>
+    </div>
+
+    <div id="section-collage">
+        <div class="container" style="max-width: 1200px;">
+            <h1>Our Lifetime of Memories</h1>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="photo1.jpg"></div>
+                <div class="gallery-item"><img src="photo2.jpg"></div>
+                <div class="gallery-item"><img src="photo3.jpg"></div>
+                <div class="gallery-item"><img src="photo4.jpg"></div>
+                <div class="gallery-item"><img src="photo5.jpg"></div>
+                <div class="gallery-item"><img src="photo6.jpg"></div>
+                
+                <div class="gallery-item"><video controls><source src="video1.mp4" type="video/mp4"></video></div>
+                <div class="gallery-item"><video controls><source src="video2.mp4" type="video/mp4"></video></div>
+                <div class="gallery-item"><video controls><source src="video3.mp4" type="video/mp4"></video></div>
+                <div class="gallery-item"><video controls><source src="video4.mp4" type="video/mp4"></video></div>
+                <div class="gallery-item"><video controls><source src="video5.mp4" type="video/mp4"></video></div>
+                <div class="gallery-item"><video controls><source src="video6.mp4" type="video/mp4"></video></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MUSIC LOGIC (Browsers require user click to play)
+        function playMusic() { document.getElementById('bg-music').play(); }
+
+        // SLIDESHOW
+        let sIndex = 0;
+        let slides = document.getElementsByClassName("mySlides");
+        function runSlides() {
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            sIndex++;
+            if (sIndex > slides.length) { sIndex = 1; }
+            slides[sIndex-1].style.display = "block";
+            setTimeout(runSlides, 3500);
+        }
+        runSlides();
+
+        // HEARTS
+        function makeHeart() {
+            const h = document.createElement('div');
+            h.classList.add('heart'); h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.animationDuration = (Math.random() * 3 + 5) + "s";
+            document.getElementById('hearts').appendChild(h);
+            setTimeout(() => h.remove(), 7000);
+        }
+        setInterval(makeHeart, 500);
+
+        // NAVIGATION
+        function showPassword() {
+            document.getElementById('section-letter').style.display = 'none';
+            document.getElementById('section-password').style.display = 'flex';
+        }
+
+        function checkPassword() {
+            let val = document.getElementById('pass-field').value.trim().toLowerCase();
+            let err = document.getElementById('err');
+            
+            if (val === 'you') {
+                document.getElementById('sparkle-sound').play();
+                document.getElementById('section-password').style.display = 'none';
+                document.getElementById('section-collage').style.display = 'block';
+                for(let i=0; i<30; i++) setTimeout(makeHeart, i*100);
+            } else if (val.includes('ronaldo')) {
+                err.innerText = "Really? Not even in a million years gurl 💅";
+                err.style.display = 'block';
+            } else if (val.includes('messi')) {
+                err.innerText = "He's the GOAT, but not my favorite!";
+                err.style.display = 'block';
+            } else {
+                err.innerText = "Wrong! Hint: Look in the mirror.";
+                err.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
