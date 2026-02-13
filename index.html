@@ -9,7 +9,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #fff5f7; color: #4a4a4a; font-family: 'Playfair Display', serif; overflow-x: hidden; text-align: center; }
 
-        /* HEARTS - MOVED TO THE VERY BACK */
+        /* HEARTS BACKGROUND - PUSHED TO THE BACK */
         .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -10; overflow: hidden; }
         .heart { position: absolute; top: -20px; font-size: 25px; color: #ff8fa3; opacity: 0.6; animation: fall 7s linear forwards; }
         @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
@@ -30,37 +30,47 @@
             position: relative; z-index: 20;
         }
 
-        h1 { font-family: 'Great Vibes', cursive; color: #c2185b; font-size: 4rem; margin-bottom: 10px; }
-        .letter-text { text-align: left; font-size: 1.7rem; line-height: 1.8; font-family: 'Great Vibes', cursive; white-space: pre-wrap; margin: 30px 0; }
-
-        /* GALLERY GRID - PORTRAIT FOCUS */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 20px 0; }
+        h1 { font-family: 'Great Vibes', cursive; color: #c2185b; font-size: 4rem; margin-bottom: 10px; font-weight: 400; }
+        h3 { color: #9e9e9e; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 40px; }
         
+        /* THE LETTER */
+        .letter-text { 
+            text-align: left; font-size: 1.8rem; line-height: 1.8; 
+            font-family: 'Great Vibes', cursive; white-space: pre-wrap; margin: 30px 0; color: #333;
+        }
+
+        /* SLIDESHOW */
+        .slideshow-container { width: 100%; height: 500px; margin-bottom: 50px; border-radius: 20px; overflow: hidden; background-color: #000; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .mySlides { display: none; height: 100%; width: 100%; }
+        .mySlides img { width: 100%; height: 100%; object-fit: contain; }
+        .fade { animation: fadeEffect 2.5s ease-in-out; }
+        @keyframes fadeEffect { from {opacity: 0.3} to {opacity: 1} }
+
+        /* GALLERY - PORTRAIT FOCUS */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 20px 0; }
         .gallery-item { 
-            background: white; border-radius: 15px; overflow: hidden; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            cursor: pointer; 
-            transition: transform 0.3s ease;
-            position: relative;
-            z-index: 50; /* Ensuring items are above containers */
+            background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            cursor: pointer; transition: transform 0.3s ease; position: relative; z-index: 50;
         }
         .gallery-item:hover { transform: translateY(-10px); }
         .gallery-item img, .gallery-item video { width: 100%; height: 450px; object-fit: cover; display: block; pointer-events: none; }
 
-        /* LIGHTBOX OVERLAY */
+        /* LIGHTBOX */
         #lightbox {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 3000;
             display: none; justify-content: center; align-items: center;
         }
-        #lightbox-content { max-width: 90%; max-height: 85%; border-radius: 10px; pointer-events: auto; }
+        #lightbox-content { max-width: 90%; max-height: 85%; border-radius: 10px; }
         .close-btn { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 50px; cursor: pointer; z-index: 3001; }
 
+        /* BUTTONS & INPUT */
         .btn { padding: 18px 45px; background: linear-gradient(135deg, #d6336c, #ff758c); color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; margin-top: 20px; font-family: 'Playfair Display', serif; position: relative; z-index: 60; }
         input { width: 80%; padding: 15px; border-radius: 10px; border: 1px solid #ffd1dc; text-align: center; margin: 20px 0; font-size: 1.2rem; }
+        #section-password, #section-collage { display: none; }
     </style>
 </head>
-<body onclick="playMusicOnFirstClick()">
+<body onclick="playMusic()">
 
     <audio id="bg-music" loop><source src="music.mp3" type="audio/mpeg"></audio>
 
@@ -71,27 +81,58 @@
 
     <div id="main-content">
         <div class="heart-bg" id="hearts"></div>
+        
         <div class="container" id="section-letter">
             <h1>Happy Valentine’s Day</h1>
+            <h3>To my wife & best friend</h3>
+
+            <div class="slideshow-container">
+                <div class="mySlides fade"><img src="photo1.jpg"></div>
+                <div class="mySlides fade"><img src="photo2.jpg"></div>
+                <div class="mySlides fade"><img src="photo3.jpg"></div>
+                <div class="mySlides fade"><img src="photo4.jpg"></div>
+                <div class="mySlides fade"><img src="photo5.jpg"></div>
+                <div class="mySlides fade"><img src="photo6.jpg"></div>
+            </div>
+
             <div class="letter-text">
 My love,
-... (Your full letter here) ...
+
+Happy Valentine’s Day to my wife, my best friend, my constant, and the only girl who has known me since junior kindergarten.
+
+It still amazes me that our story did not begin with some dramatic first meeting. It began with crayons, school uniforms, and two kids who had no idea they would grow up and choose each other forever. You used to bully me in 5th grade, and somehow that teasing never really stopped. It just changed. It became love hiding inside sarcasm, affection wrapped in eye rolls, and care disguised as the way you still pull my leg.
+
+And I would not change a single second of it.
+
+Because underneath that teasing girl has always been the woman who stands by me, challenges me, and pushes me to become better. You have seen every version of me. The awkward kid. The confused teenager. The dreaming man trying to build something of himself. And you stayed. You did not fall in love with just one phase of me. You grew with me.
+
+That is what makes us special.
+
+We do not just share romance. We share history. We share classrooms, growing pains, silly fights, uncontrollable laughter, and inside jokes that nobody else would ever understand. We share a lifetime that started long before either of us understood what love even meant.
+
+Today I do not just celebrate Valentine’s Day. I celebrate us. I celebrate the way you still tease me. I celebrate the comfort I feel with you. I celebrate that out of everyone in this world, we somehow found our way back to each other.
+
+I promise to keep choosing you. In every season. In every phase. In every lifetime.
             </div>
+
+            <p style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c2185b;">Forever yours bachha,<br>Ethan</p>
             <button class="btn" onclick="showPassword()">I have one last question...</button>
         </div>
 
-        <div id="section-password" style="display:none;">
+        <div id="section-password">
             <div class="container">
-                <h2 style="font-family: 'Playfair Display';">Who is my favorite footballer?</h2>
+                <h1 style="font-size: 3rem;">Just one more thing...</h1>
+                <h2 style="font-family: 'Playfair Display'; margin-top: 20px;">Who is my favorite footballer?</h2>
                 <input type="text" id="pass-field" placeholder="Hint: Look in the mirror">
                 <br>
-                <button class="btn" onclick="checkPassword()">Unlock Memories</button>
+                <button class="btn" onclick="checkPassword()">Unlock the Surprise</button>
+                <p id="err" style="color:red; display:none; margin-top:15px; font-weight: bold;"></p>
             </div>
         </div>
 
-        <div id="section-collage" style="display:none;">
-            <div class="container" style="max-width: 1100px;">
-                <h1>Our Memories</h1>
+        <div id="section-collage">
+            <div class="container" style="max-width: 1200px;">
+                <h1 style="font-size: 5rem;">Our Memories</h1>
                 <p style="margin-bottom: 20px; font-style: italic;">Click any memory to see it full screen</p>
                 <div class="gallery-grid">
                     <div class="gallery-item" onclick="expand(this)"><img src="photo1.jpg"></div>
@@ -117,62 +158,4 @@ My love,
     </div>
 
     <script>
-        function playMusicOnFirstClick() {
-            document.getElementById('bg-music').play().catch(() => {});
-        }
-
-        function startExperience() {
-            document.getElementById('bg-music').play();
-            document.getElementById('cover-page').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('cover-page').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 10);
-                setInterval(makeHeart, 500);
-            }, 1000);
-        }
-
-        function expand(el) {
-            const lightbox = document.getElementById('lightbox');
-            const target = document.getElementById('lightbox-target');
-            const media = el.querySelector('img, video').cloneNode(true);
-            
-            if (media.tagName === 'VIDEO') {
-                media.controls = true;
-                media.play();
-            }
-            
-            target.innerHTML = '';
-            target.appendChild(media);
-            media.id = "lightbox-content";
-            lightbox.style.display = 'flex';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.getElementById('lightbox-target').innerHTML = '';
-        }
-
-        function makeHeart() {
-            const h = document.createElement('div');
-            h.classList.add('heart'); h.innerHTML = '❤️';
-            h.style.left = Math.random() * 100 + "vw";
-            h.style.animationDuration = (Math.random() * 3 + 5) + "s";
-            document.getElementById('hearts').appendChild(h);
-            setTimeout(() => h.remove(), 7000);
-        }
-
-        function showPassword() {
-            document.getElementById('section-letter').style.display = 'none';
-            document.getElementById('section-password').style.display = 'block';
-        }
-
-        function checkPassword() {
-            if (document.getElementById('pass-field').value.toLowerCase().trim() === 'you') {
-                document.getElementById('section-password').style.display = 'none';
-                document.getElementById('section-collage').style.display = 'block';
-            }
-        }
-    </script>
-</body>
-</html>
+        function playMusic() { document.getElementById('bg-music').
