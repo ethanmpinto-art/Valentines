@@ -9,7 +9,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #fff5f7; color: #4a4a4a; font-family: 'Playfair Display', serif; overflow-x: hidden; text-align: center; }
 
-        /* HEARTS BACKGROUND - PUSHED TO THE BACK */
+        /* HEARTS BACKGROUND */
         .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -10; overflow: hidden; }
         .heart { position: absolute; top: -20px; font-size: 25px; color: #ff8fa3; opacity: 0.6; animation: fall 7s linear forwards; }
         @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
@@ -19,9 +19,10 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 2000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease;
         }
 
-        /* MAIN APP WRAPPER */
+        /* MAIN CONTENT */
         #main-content { display: none; opacity: 0; transition: opacity 1.5s ease; position: relative; z-index: 10; }
 
         .container { 
@@ -32,21 +33,9 @@
 
         h1 { font-family: 'Great Vibes', cursive; color: #c2185b; font-size: 4rem; margin-bottom: 10px; font-weight: 400; }
         h3 { color: #9e9e9e; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 40px; }
-        
-        /* THE LETTER */
-        .letter-text { 
-            text-align: left; font-size: 1.8rem; line-height: 1.8; 
-            font-family: 'Great Vibes', cursive; white-space: pre-wrap; margin: 30px 0; color: #333;
-        }
+        .letter-text { text-align: left; font-size: 1.8rem; line-height: 1.8; font-family: 'Great Vibes', cursive; white-space: pre-wrap; margin: 30px 0; color: #333; }
 
-        /* SLIDESHOW */
-        .slideshow-container { width: 100%; height: 500px; margin-bottom: 50px; border-radius: 20px; overflow: hidden; background-color: #000; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        .mySlides { display: none; height: 100%; width: 100%; }
-        .mySlides img { width: 100%; height: 100%; object-fit: contain; }
-        .fade { animation: fadeEffect 2.5s ease-in-out; }
-        @keyframes fadeEffect { from {opacity: 0.3} to {opacity: 1} }
-
-        /* GALLERY - PORTRAIT FOCUS */
+        /* GALLERY & PORTRAIT SETTINGS */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 20px 0; }
         .gallery-item { 
             background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
@@ -56,45 +45,31 @@
         .gallery-item img, .gallery-item video { width: 100%; height: 450px; object-fit: cover; display: block; pointer-events: none; }
 
         /* LIGHTBOX */
-        #lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 3000;
-            display: none; justify-content: center; align-items: center;
-        }
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; display: none; justify-content: center; align-items: center; }
         #lightbox-content { max-width: 90%; max-height: 85%; border-radius: 10px; }
         .close-btn { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 50px; cursor: pointer; z-index: 3001; }
 
-        /* BUTTONS & INPUT */
-        .btn { padding: 18px 45px; background: linear-gradient(135deg, #d6336c, #ff758c); color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; margin-top: 20px; font-family: 'Playfair Display', serif; position: relative; z-index: 60; }
+        /* UI ELEMENTS */
+        .btn { padding: 18px 45px; background: linear-gradient(135deg, #d6336c, #ff758c); color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; margin-top: 20px; font-family: 'Playfair Display', serif; position: relative; z-index: 2100; }
         input { width: 80%; padding: 15px; border-radius: 10px; border: 1px solid #ffd1dc; text-align: center; margin: 20px 0; font-size: 1.2rem; }
         #section-password, #section-collage { display: none; }
     </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
     <audio id="bg-music" loop><source src="music.mp3" type="audio/mpeg"></audio>
 
     <div id="cover-page">
         <h1 style="font-size: 3rem;">For My Favorite Person</h1>
-        <button class="btn" onclick="startExperience()">Open Your Surprise</button>
+        <p style="font-style: italic; margin-bottom: 30px; color: #888;">Turn up your volume...</p>
+        <button class="btn" id="start-button" onclick="startExperience()">Open Your Surprise</button>
     </div>
 
     <div id="main-content">
         <div class="heart-bg" id="hearts"></div>
-        
         <div class="container" id="section-letter">
             <h1>Happy Valentine’s Day</h1>
             <h3>To my wife & best friend</h3>
-
-            <div class="slideshow-container">
-                <div class="mySlides fade"><img src="photo1.jpg"></div>
-                <div class="mySlides fade"><img src="photo2.jpg"></div>
-                <div class="mySlides fade"><img src="photo3.jpg"></div>
-                <div class="mySlides fade"><img src="photo4.jpg"></div>
-                <div class="mySlides fade"><img src="photo5.jpg"></div>
-                <div class="mySlides fade"><img src="photo6.jpg"></div>
-            </div>
-
             <div class="letter-text">
 My love,
 
@@ -114,7 +89,6 @@ Today I do not just celebrate Valentine’s Day. I celebrate us. I celebrate the
 
 I promise to keep choosing you. In every season. In every phase. In every lifetime.
             </div>
-
             <p style="font-family: 'Great Vibes'; font-size: 2.5rem; color: #c2185b;">Forever yours bachha,<br>Ethan</p>
             <button class="btn" onclick="showPassword()">I have one last question...</button>
         </div>
@@ -158,4 +132,64 @@ I promise to keep choosing you. In every season. In every phase. In every lifeti
     </div>
 
     <script>
-        function playMusic() { document.getElementById('bg-music').
+        // Start Experience Function
+        function startExperience() {
+            console.log("Button clicked!");
+            const music = document.getElementById('bg-music');
+            
+            // Try to play music, but continue even if it fails
+            music.play().catch(error => console.log("Music play blocked or failed"));
+            
+            // UI Transitions
+            document.getElementById('cover-page').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('cover-page').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 10);
+                setInterval(makeHeart, 500);
+            }, 1000);
+        }
+
+        function expand(el) {
+            const lightbox = document.getElementById('lightbox');
+            const target = document.getElementById('lightbox-target');
+            const media = el.querySelector('img, video').cloneNode(true);
+            if (media.tagName === 'VIDEO') { media.controls = true; media.play(); }
+            target.innerHTML = '';
+            target.appendChild(media);
+            media.id = "lightbox-content";
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.getElementById('lightbox-target').innerHTML = '';
+        }
+
+        function makeHeart() {
+            const h = document.createElement('div');
+            h.classList.add('heart'); h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.animationDuration = (Math.random() * 3 + 5) + "s";
+            document.getElementById('hearts').appendChild(h);
+            setTimeout(() => h.remove(), 7000);
+        }
+
+        function showPassword() {
+            document.getElementById('section-letter').style.display = 'none';
+            document.getElementById('section-password').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const val = document.getElementById('pass-field').value.trim().toLowerCase();
+            if (val === 'you') {
+                document.getElementById('section-password').style.display = 'none';
+                document.getElementById('section-collage').style.display = 'block';
+            } else {
+                document.getElementById('err').innerText = "Wrong answer! Hint: Look in the mirror.";
+                document.getElementById('err').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
